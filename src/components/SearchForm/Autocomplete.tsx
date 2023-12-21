@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { fetchTVShows } from "../../store/showsThunks";
 import { searchField, selectShows } from "../../store/showsSlice";
 import { RootState } from "../../app/store";
+import ShowInfoItem from "../ShowInfoItem/ShowInfoItem";
 
 const AutoComplete = () => {
   const dispatch = useAppDispatch();
@@ -40,7 +41,9 @@ const AutoComplete = () => {
         sx={{ width: 300 }}
         renderInput={(params) => <TextField {...params} label="name" />}
         renderOption={(_, option) => (
-          <div key={option.show.id}>{option.show.name}</div>
+          <div key={option.show.id}>
+            <ShowInfoItem id={option.show.id} name={option.show.name} />
+          </div>
         )}
       />
     </>
