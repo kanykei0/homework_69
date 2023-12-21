@@ -1,7 +1,11 @@
+import SearchForm from "./components/SearchForm/SearchForm";
+
 function App() {
   return (
     <>
-      <div>App</div>
+      <div className="container mt-5">
+        <SearchForm />
+      </div>
     </>
   );
 }
