@@ -1,5 +1,3 @@
-import React from "react";
-
 export interface Show {
   id: number;
   name: string;
