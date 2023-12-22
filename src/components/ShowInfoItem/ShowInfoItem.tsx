@@ -8,7 +8,7 @@ interface Props {
 
 const ShowInfoItem: React.FC<Props> = ({ id, name }) => {
   return (
-    <Link to={`/tv-shows/${id}`}>
+    <Link className="nav-link ms-4" to={`/tv-shows/${id}`}>
       <p>{name}</p>
     </Link>
   );

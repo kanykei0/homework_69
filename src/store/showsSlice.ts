@@ -1,13 +1,14 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { fetchTVShows } from "./showsThunks";
+import { fetchTVShows, fetchTVShowsInfo } from "./showsThunks";
 import { RootState } from "../app/store";
-import { ShowsProps } from "../types";
+import { InfoShowProps, ShowsProps } from "../types";
 
 interface ShowsState {
   fetchLoading: boolean;
   deleteLoading: boolean;
   items: ShowsProps[] | null;
   field: string;
+  showInfo: InfoShowProps | null;
 }
 
 const initialState: ShowsState = {
@@ -15,6 +16,7 @@ const initialState: ShowsState = {
   deleteLoading: false,
   items: null,
   field: "",
+  showInfo: null,
 };
 
 export const showsSlice = createSlice({
@@ -36,9 +38,13 @@ export const showsSlice = createSlice({
     builder.addCase(fetchTVShows.rejected, (state) => {
       state.fetchLoading = false;
     });
+    builder.addCase(fetchTVShowsInfo.fulfilled, (state, action) => {
+      state.showInfo = action.payload;
+    });
   },
 });
 
 export const showsReducer = showsSlice.reducer;
 export const selectShows = (state: RootState) => state.shows.items;
+export const selectShowsInfo = (state: RootState) => state.shows.showInfo;
 export const { searchField } = showsSlice.actions;
