@@ -38,8 +38,15 @@ export const showsSlice = createSlice({
     builder.addCase(fetchTVShows.rejected, (state) => {
       state.fetchLoading = false;
     });
+    builder.addCase(fetchTVShowsInfo.pending, (state) => {
+      state.fetchLoading = true;
+    });
     builder.addCase(fetchTVShowsInfo.fulfilled, (state, action) => {
+      state.fetchLoading = false;
       state.showInfo = action.payload;
+    });
+    builder.addCase(fetchTVShowsInfo.rejected, (state) => {
+      state.fetchLoading = false;
     });
   },
 });

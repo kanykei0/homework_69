@@ -13,7 +13,11 @@ const TVShowInfoCard: React.FC<Props> = ({ showInfo }) => {
         <div>
           <img
             className="tv-image rounded"
-            src={showInfo.image.original}
+            src={
+              showInfo.image
+                ? showInfo.image.original
+                : "https://americandurafilm.com/wp-content/uploads/2022/06/No-Image-Placeholder.png"
+            }
             alt={showInfo.name}
           />
         </div>
@@ -22,26 +26,42 @@ const TVShowInfoCard: React.FC<Props> = ({ showInfo }) => {
             <tbody>
               <tr>
                 <th>Rating:</th>
-                <td>{showInfo.rating.average}</td>
+                <td>
+                  {showInfo.rating.average ? showInfo.rating.average : "Empty"}
+                </td>
               </tr>
               <tr>
                 <th>Premiered:</th>
-                <td>{showInfo.premiered}</td>
+                <td>{showInfo.premiered ? showInfo.premiered : "Empty"}</td>
+              </tr>
+              <tr>
+                <th>Type:</th>
+                <td>{showInfo.type}</td>
               </tr>
               <tr>
                 <th>Genre:</th>
                 <td>
-                  {showInfo.genres.map((genre, index) => (
-                    <span key={index} className="me-2 p-0">
-                      {genre}
-                      {index < showInfo.genres.length - 1 && <span>,</span>}
-                    </span>
-                  ))}
+                  {showInfo.genres.length > 0
+                    ? showInfo.genres.map((genre, index) => (
+                        <span key={index} className="me-2 p-0">
+                          {genre}
+                          {index < showInfo.genres.length - 1 && <span>,</span>}
+                        </span>
+                      ))
+                    : "Empty"}
                 </td>
               </tr>
               <tr>
+                <th className="pe-5">Language: </th>
+                <td>{showInfo.language}</td>
+              </tr>
+              <tr>
                 <th className="pe-5">Average runtime: </th>
-                <td>{showInfo.averageRuntime} min</td>
+                <td>
+                  {showInfo.averageRuntime
+                    ? showInfo.averageRuntime + " min"
+                    : "Empty"}
+                </td>
               </tr>
               <tr>
                 <th>Status: </th>

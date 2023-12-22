@@ -5,11 +5,16 @@ import { useEffect } from "react";
 import { fetchTVShowsInfo } from "../../store/showsThunks";
 import { InfoShowProps } from "../../types";
 import TVShowInfoCard from "./TVShowInfoCard";
+import { RootState } from "../../app/store";
+import { Spinner } from "react-bootstrap";
 
 const ShowInfo = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
   const showData = useAppSelector<InfoShowProps | null>(selectShowsInfo);
+  const isLoading = useAppSelector(
+    (state: RootState) => state.shows.fetchLoading
+  );
 
   useEffect(() => {
     const getData = async () => {
@@ -20,7 +25,15 @@ const ShowInfo = () => {
 
   return (
     <div className="float-end card shadow p-3 me-5 info-card">
-      {showData ? <TVShowInfoCard showInfo={showData} /> : <h2>Nothing</h2>}
+      {isLoading ? (
+        <div className="m-5 p-5">
+          <Spinner />
+        </div>
+      ) : showData ? (
+        <TVShowInfoCard showInfo={showData} />
+      ) : (
+        <h2>Nothing</h2>
+      )}
     </div>
   );
 };

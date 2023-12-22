@@ -21,7 +21,9 @@ export interface InfoShowProps {
   };
   image: {
     original: string;
-  };
+  } | null;
   summary: string;
   status: string;
+  type: string;
+  language: string;
 }
